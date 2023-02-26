@@ -147,6 +147,10 @@ header a:hover {
 }
 
 /*** VAN PAGES ***/
+a {
+  color: #161616;
+  text-decoration: none;
+}
 .van-list-container {
   padding-inline: 23px;
   margin-bottom: 2rem;
