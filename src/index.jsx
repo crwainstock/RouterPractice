@@ -15,11 +15,13 @@ function App() {
         </Link>
         <nav>
           <Link to="/about">About</Link>
+          <Link to="/vanlist">Vans</Link>
         </nav>
       </header>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/vanlist" element={<VanList />} />
       </Routes>
     </BrowserRouter>
   );
