@@ -440,3 +440,18 @@ i[class*="van-type-"] {
 .host-van-detail-info > h4 > span {
   font-weight: 500;
 }
+
+.host-van-detail-image {
+  height: 100px;
+  border-radius: 5px;
+}
+
+.host-van-price {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.host-van-price > span {
+  font-size: 16px;
+  color: #4d4d4d;
+}
