@@ -18,6 +18,11 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+.site-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 header {
   height: 110px;
@@ -51,11 +56,7 @@ header a:hover {
   color: #161616;
   text-decoration: underline;
 }
-.site-wrapper {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+
 main {
   margin-bottom: 84px;
 }
