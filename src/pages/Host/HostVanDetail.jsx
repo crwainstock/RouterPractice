@@ -20,7 +20,7 @@ export default function HostVanDetail() {
   }, []);
 
   return (
-    <section>
+    <section id="host-van-details">
       <Link to="?" className="back-button">
         &larr; <span>Back to all vans</span>
       </Link>

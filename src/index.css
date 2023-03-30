@@ -368,6 +368,14 @@ i[class*="van-type-"] {
   margin-block: 10px;
 }
 
+#host-van-details {
+  margin-top: 2rem;
+}
+
+#host-van-details a {
+  margin-left: 2rem;
+}
+
 .host-van-detail-layout-container {
   background-color: white;
   padding: 24px;
