@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 export default function HostVans() {
   const [vans, setVans] = useState([]);
 
+  // Fetch van data with useEffect
   useEffect(() => {
     fetch("/api/host/vans")
       .then((res) => res.json())
@@ -34,7 +35,7 @@ export default function HostVans() {
         {vans.length > 0 ? (
           <section>{hostVansEls}</section>
         ) : (
-          <h2>Loading...</h2>
+          <h2>You don't have any vans.</h2>
         )}
       </div>
     </section>
