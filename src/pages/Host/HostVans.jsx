@@ -14,7 +14,6 @@ export default function HostVans() {
     setLoading(false);
   };
 
-  // Fetch van data with useEffect
   useEffect(() => {
     fetchVans();
   }, []);
