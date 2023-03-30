@@ -64,6 +64,7 @@ export default function HostVanDetail() {
           </NavLink>
         </nav>
         <Outlet context={[currentVan, setCurrentVan]} />
+        {/* context={{currentVan}} -- This way sends just the object of data*/}
       </div>
     </section>
   );

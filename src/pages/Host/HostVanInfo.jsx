@@ -2,26 +2,23 @@ import React from "react";
 import { useOutletContext } from "react-router-dom";
 
 export default function HostVanInfo() {
+  // const { currentVan } = useOutletContext(); // Another way to send just the object of data
   const [currentVan, setCurrentVan] = useOutletContext();
   console.log(currentVan);
   return (
-    <div>
-      <p>
-        <span>Name: </span>
-        {currentVan.name}
-      </p>
-      <p>
-        <span>Category: </span>
-        {currentVan.type}
-      </p>
-      <p>
-        <span>Description: </span>
-        {currentVan.description}
-      </p>
-      <p>
-        <span>Visibility: </span>
-        Public
-      </p>
-    </div>
+    <section className="host-van-detail-info">
+      <h4>
+        Name: <span>{currentVan.name}</span>
+      </h4>
+      <h4>
+        Category: <span>{currentVan.type}</span>
+      </h4>
+      <h4>
+        Description: <span>{currentVan.description}</span>
+      </h4>
+      <h4>
+        Visibility: <span>Public</span>
+      </h4>
+    </section>
   );
 }
