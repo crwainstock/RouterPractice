@@ -375,7 +375,6 @@ i[class*="van-type-"] {
 #host-van-details a {
   margin-left: 2rem;
 }
-
 .host-van-detail-layout-container {
   background-color: white;
   padding: 24px;
@@ -408,6 +407,8 @@ i[class*="van-type-"] {
 .host-van-detail-nav {
   display: flex;
   margin-block: 25px;
+  flex-wrap: wrap;
+  /* Temporary fix to nav overflowing container */
 }
 
 .host-van-detail-nav a {
