@@ -4,12 +4,19 @@ import { Link } from "react-router-dom";
 
 export default function HostVans() {
   const [vans, setVans] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchVans = async () => {
+    setLoading(true);
+    let results = await fetch(`/api/host/vans`);
+    let data = await results.json();
+    setVans(data.vans);
+    setLoading(false);
+  };
 
   // Fetch van data with useEffect
   useEffect(() => {
-    fetch("/api/host/vans")
-      .then((res) => res.json())
-      .then((data) => setVans(data.vans));
+    fetchVans();
   }, []);
 
   const hostVansEls = vans.map((van) => (
@@ -32,10 +39,12 @@ export default function HostVans() {
     <section>
       <h1 className="host-vans-title">Your listed vans</h1>
       <div className="host-vans-list">
-        {vans.length > 0 ? (
-          <section>{hostVansEls}</section>
+        {loading ? (
+          <div>
+            <h3>Loading...</h3>
+          </div>
         ) : (
-          <h2>You don't have any vans.</h2>
+          <section>{hostVansEls}</section>
         )}
       </div>
     </section>
