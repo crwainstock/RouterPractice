@@ -12,7 +12,7 @@ export default function HostVanDetail() {
   const fetchVanDetails = async () => {
     let results = await fetch(`/api/host/vans/${id}`);
     let data = await results.json();
-    console.log(data.vans[0]);
+    setCurrentVan(data.vans[0]);
   };
 
   useEffect(() => {
@@ -21,7 +21,10 @@ export default function HostVanDetail() {
 
   return (
     <div>
-      <h1>Host vans details go here.</h1>
+      <img src={currentVan.imageUrl} />
+      <h2>{currentVan.name}</h2>
+      <p>{currentVan.price}</p>
+      <p>{currentVan.type}</p>
     </div>
   );
 }
