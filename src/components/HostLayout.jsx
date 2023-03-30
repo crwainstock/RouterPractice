@@ -9,11 +9,14 @@ export default function HostLayout() {
     color: "#161616",
   };
 
+  // Tutorial suggests changing these relative paths to just /income /vans /reviews because they are in the host layout
+  // and that assumes it starts with the /host path, but it wasn't working when I tried that.
+
   return (
     <div>
       <nav className="host-nav">
         <NavLink
-          to="/host"
+          to="."
           end
           style={({ isActive }) => (isActive ? activeStyles : null)}
         >
