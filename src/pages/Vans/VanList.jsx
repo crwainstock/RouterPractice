@@ -1,9 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 export default function VanList() {
+  const [searchParams, setSearchParam] = useSearchParams();
   const [vans, setVans] = useState([]);
+
+  //Using useSearchParams to filter van list by type
+  const typeFilter = searchParams.get("type");
+  console.log(typeFilter);
 
   useEffect(() => {
     fetch("/api/vans")
