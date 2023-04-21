@@ -71,9 +71,9 @@ export default function VanList() {
           Rugged
         </button>
         <button
-          className="van-type clear-filter"
+          className="van-type clear-filters"
           onClick={() => {
-            setSearchParam({ type: "" });
+            setSearchParam({});
           }}
         >
           Clear Filter
