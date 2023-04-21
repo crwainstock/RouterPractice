@@ -200,6 +200,15 @@ a {
   border-radius: 5px;
 }
 
+.van-list-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.van-list-filter-buttons > a {
+  margin-right: 15px;
+}
+
 .van-list-container button {
   margin-right: 20px;
   cursor: pointer;
