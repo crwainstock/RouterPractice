@@ -22,7 +22,11 @@ export default function VanList() {
   //   setVans(data);
   // };
 
-  const vanElements = vans.map((van) => (
+  const filteredVans = typeFilter
+    ? vans.filter((van) => van.type === typeFilter)
+    : vans;
+
+  const vanElements = filteredVans.map((van) => (
     <Link to={`/vans/${van.id}`}>
       <div key={van.id} className="van-tile">
         <img src={van.imageUrl} />
