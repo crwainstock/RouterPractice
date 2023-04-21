@@ -84,15 +84,30 @@ export default function VanList() {
   );
 }
 
-// <Link to="?type=simple" className="van-type simple">
+//Using URLSearchParams methods to get path for Links below -- .delete() & .set() are methods with URLSearchParams
+
+// function genNewSearchParamString(key, value) {
+//   const sp = new URLSearchParams(searchParams);
+//   if (value === null) {
+//     sp.delete(key);
+//   } else {
+//     sp.set(key, value);
+//   }
+//   return `?${sp.toString()}`;
+// }
+
+//These examples uses the helper function above to generate the string for the URL path
+//Should allow for multiple query parameters to be used together instead of clearing out existing search parameters
+
+// <Link to={genNewSearchParamString("type", "simple")} className="van-type simple">
 //           Simple
 //         </Link>
-//         <Link to="?type=luxury" className="van-type luxury">
+//         <Link to={genNewSearchParamString("type", "luxury")} className="van-type luxury">
 //           Luxury
 //         </Link>
-//         <Link to="?type=rugged" className="van-type rugged">
+//         <Link to={genNewSearchParamString("type", "rugged")} className="van-type rugged">
 //           Rugged
 //         </Link>
-//         <Link to="." className="van-type clear-filters">
+//         <Link to={genNewSearchParamString("type", null)} className="van-type clear-filters">
 //           Clear
 //         </Link>
