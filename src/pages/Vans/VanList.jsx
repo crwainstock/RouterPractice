@@ -25,9 +25,9 @@ export default function VanList() {
   const filteredVans = typeFilter
     ? vans.filter((van) => van.type === typeFilter)
     : vans;
-
+  //State can be used in the Link as a prop to pass data to the next page
   const vanElements = filteredVans.map((van) => (
-    <Link to={van.id}>
+    <Link to={van.id} state={{ search: searchParams.toString() }}>
       <div key={van.id} className="van-tile">
         <img src={van.imageUrl} />
         <div className="van-info">
