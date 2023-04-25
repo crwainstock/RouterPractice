@@ -18,14 +18,12 @@ export default function VanDetail() {
 
   //This uses the location data saved in the Link state from VanList -- if there's a search filter, it's used in the back button URL, if not, no filter is used
   const search = location.state?.search || "";
+  const type = location.state?.type || "all";
 
-  //The {van.type} in the back to vans link could be achieved by passing state from the VanList component, too.
-  // Like the location state, it could then be accessed here in a similar way:
-  // const type = location.state.type; with {type} in the text
   return (
     <div className="van-detail-container">
       <Link to={`..${search}`} relative="path" className="back-button">
-        &larr; <span>Back to {van.type} vans</span>
+        &larr; <span>Back to {type} vans</span>
       </Link>
       {van ? (
         <div className="van-detail">
