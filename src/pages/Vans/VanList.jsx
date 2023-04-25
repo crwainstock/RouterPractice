@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 export default function VanList() {
-  const [searchParams, setSearchParam] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [vans, setVans] = useState([]);
 
   //Using useSearchParams to filter van list by type
@@ -42,43 +42,47 @@ export default function VanList() {
     </Link>
   ));
 
+  function handleFilterChange(key, value) {
+    setSearchParams((prevParams) => {
+      if (value === null) {
+        prevParams.delete(key);
+      } else {
+        prevParams.set(key, value);
+      }
+      return prevParams;
+    });
+  }
+
   return (
     <div className="van-list-container">
       <h1>Explore our van options</h1>
       <div className="van-list-filter-buttons">
         <button
+          onClick={() => handleFilterChange("type", "simple")}
           className="van-type simple"
-          onClick={() => {
-            setSearchParam({ type: "simple" });
-          }}
         >
           Simple
         </button>
         <button
+          onClick={() => handleFilterChange("type", "luxury")}
           className="van-type luxury"
-          onClick={() => {
-            setSearchParam({ type: "luxury" });
-          }}
         >
           Luxury
         </button>
         <button
+          onClick={() => handleFilterChange("type", "rugged")}
           className="van-type rugged"
-          onClick={() => {
-            setSearchParam({ type: "rugged" });
-          }}
         >
           Rugged
         </button>
         <button
+          onClick={() => handleFilterChange("type", null)}
           className="van-type clear-filters"
-          onClick={() => {
-            setSearchParam({});
-          }}
         >
-          Clear Filter
+          Clear filter
         </button>
       </div>
+
       <div className="van-list">{vanElements}</div>
     </div>
   );
@@ -111,3 +115,40 @@ export default function VanList() {
 //         <Link to={genNewSearchParamString("type", null)} className="van-type clear-filters">
 //           Clear
 //         </Link>
+
+// Setting search params in onClick function -- version prior to current version
+
+// <div className="van-list-filter-buttons">
+//   <button
+//     className="van-type simple"
+//     onClick={() => {
+//       setSearchParam({ type: "simple" });
+//     }}
+//   >
+//     Simple
+//   </button>
+//   <button
+//     className="van-type luxury"
+//     onClick={() => {
+//       setSearchParam({ type: "luxury" });
+//     }}
+//   >
+//     Luxury
+//   </button>
+//   <button
+//     className="van-type rugged"
+//     onClick={() => {
+//       setSearchParam({ type: "rugged" });
+//     }}
+//   >
+//     Rugged
+//   </button>
+//   <button
+//     className="van-type clear-filters"
+//     onClick={() => {
+//       setSearchParam({});
+//     }}
+//   >
+//     Clear Filter
+//   </button>
+// </div>;
