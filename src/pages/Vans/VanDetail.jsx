@@ -16,6 +16,7 @@ export default function VanDetail() {
       .then((data) => setVan(data.vans));
   }, [params.id]);
 
+  //This uses the location data saved in the Link state from VanList -- if there's a search filter, it's used in the back button URL, if not, no filter is used
   const search = location.state?.search || "";
 
   return (
