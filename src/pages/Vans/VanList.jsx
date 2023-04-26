@@ -28,15 +28,10 @@ export default function VanList() {
     loadVans();
   }, []);
 
-  // const getVans = async () => {
-  //   let results = await fetch(`/api/vans`);
-  //   let data = results.json();
-  //   setVans(data);
-  // };
-
   const filteredVans = typeFilter
     ? vans.filter((van) => van.type === typeFilter)
     : vans;
+
   //State can be used in the Link as a prop to pass data to the next page
   const vanElements = filteredVans.map((van) => (
     <Link
@@ -66,6 +61,10 @@ export default function VanList() {
       }
       return prevParams;
     });
+  }
+
+  if (error) {
+    return <h1>There was an error: {error.message}</h1>;
   }
 
   return (
