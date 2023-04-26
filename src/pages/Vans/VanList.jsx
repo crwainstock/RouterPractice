@@ -7,6 +7,7 @@ export default function VanList() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [vans, setVans] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = React.useState(null);
 
   //Using useSearchParams to filter van list by type
   const typeFilter = searchParams.get("type");
@@ -15,9 +16,14 @@ export default function VanList() {
   useEffect(() => {
     async function loadVans() {
       setLoading(true);
-      const data = await getVans();
-      setVans(data);
-      setLoading(false);
+      try {
+        const data = await getVans();
+        setVans(data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
     }
     loadVans();
   }, []);
@@ -102,7 +108,7 @@ export default function VanList() {
       </div>
       {loading ? (
         <div className="loading">
-          <h3>Loading...</h3>
+          <h2>Loading...</h2>
         </div>
       ) : (
         <div className="van-list">{vanElements}</div>
