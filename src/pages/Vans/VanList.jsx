@@ -6,6 +6,7 @@ import { getVans } from "../../api";
 export default function VanList() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [vans, setVans] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   //Using useSearchParams to filter van list by type
   const typeFilter = searchParams.get("type");
@@ -13,8 +14,10 @@ export default function VanList() {
 
   useEffect(() => {
     async function loadVans() {
+      setLoading(true);
       const data = await getVans();
       setVans(data);
+      setLoading(false);
     }
     loadVans();
   }, []);
@@ -97,8 +100,13 @@ export default function VanList() {
           </button>
         ) : null}
       </div>
-
-      <div className="van-list">{vanElements}</div>
+      {loading ? (
+        <div className="loading">
+          <h3>Loading...</h3>
+        </div>
+      ) : (
+        <div className="van-list">{vanElements}</div>
+      )}
     </div>
   );
 }
