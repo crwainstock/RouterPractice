@@ -4,6 +4,7 @@ import { useParams, Link, useLocation } from "react-router-dom";
 
 export default function VanDetail() {
   const [van, setVan] = useState([]);
+  const [loading, setLoading] = useState(false);
   const params = useParams();
   //   console.log(params);
 
@@ -11,9 +12,11 @@ export default function VanDetail() {
   console.log(location);
 
   useEffect(() => {
+    setLoading(true);
     fetch(`/api/vans/${params.id}`)
       .then((res) => res.json())
       .then((data) => setVan(data.vans));
+    setLoading(false);
   }, [params.id]);
 
   //This uses the location data saved in the Link state from VanList -- if there's a search filter, it's used in the back button URL, if not, no filter is used
@@ -25,7 +28,7 @@ export default function VanDetail() {
       <Link to={`..${search}`} relative="path" className="back-button">
         &larr; <span>Back to {type} vans</span>
       </Link>
-      {van ? (
+      {!loading ? (
         <div className="van-detail">
           <img src={van.imageUrl} />
           <i className={`van-type ${van.type} selected`}>{van.type}</i>
