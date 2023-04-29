@@ -1,10 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useLoaderData } from "react-router-dom";
 import { getVans } from "../../api";
 
 export function loader() {
-  return "Van data goes here.";
+  return getVans();
 }
 
 export default function VanList() {
@@ -17,20 +17,23 @@ export default function VanList() {
   const typeFilter = searchParams.get("type");
   console.log(typeFilter);
 
-  useEffect(() => {
-    async function loadVans() {
-      setLoading(true);
-      try {
-        const data = await getVans();
-        setVans(data);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadVans();
-  }, []);
+  const data = useLoaderData();
+  console.log(data);
+
+  // useEffect(() => {
+  //   async function loadVans() {
+  //     setLoading(true);
+  //     try {
+  //       const data = await getVans();
+  //       setVans(data);
+  //     } catch (err) {
+  //       setError(err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
+  //   loadVans();
+  // }, []);
 
   const filteredVans = typeFilter
     ? vans.filter((van) => van.type === typeFilter)
