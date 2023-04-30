@@ -9,16 +9,16 @@ export function loader() {
 
 export default function VanList() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [vans, setVans] = useState([]);
+  // const [vans, setVans] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = React.useState(null);
+  const [error, setError] = useState(null);
 
   //Using useSearchParams to filter van list by type
   const typeFilter = searchParams.get("type");
   console.log(typeFilter);
 
-  const data = useLoaderData();
-  console.log(data);
+  //Getting van data from Loader function above
+  const vans = useLoaderData();
 
   // useEffect(() => {
   //   async function loadVans() {
