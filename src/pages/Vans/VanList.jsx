@@ -9,8 +9,6 @@ export function loader() {
 
 export default function VanList() {
   const [searchParams, setSearchParams] = useSearchParams();
-  // const [vans, setVans] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   //Using useSearchParams to filter van list by type
@@ -19,21 +17,6 @@ export default function VanList() {
 
   //Getting van data from Loader function above
   const vans = useLoaderData();
-
-  // useEffect(() => {
-  //   async function loadVans() {
-  //     setLoading(true);
-  //     try {
-  //       const data = await getVans();
-  //       setVans(data);
-  //     } catch (err) {
-  //       setError(err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
-  //   loadVans();
-  // }, []);
 
   const filteredVans = typeFilter
     ? vans.filter((van) => van.type === typeFilter)
@@ -112,13 +95,7 @@ export default function VanList() {
           </button>
         ) : null}
       </div>
-      {loading ? (
-        <div className="loading">
-          <h2>Loading...</h2>
-        </div>
-      ) : (
-        <div className="van-list">{vanElements}</div>
-      )}
+      <div className="van-list">{vanElements}</div>
     </div>
   );
 }
