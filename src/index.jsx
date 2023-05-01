@@ -13,6 +13,7 @@ import VanDetail from "./pages/Vans/VanDetail";
 import Layout from "./components/Layout";
 import Dashboard from "./pages/Host/Dashboard";
 import HostLayout from "./components/HostLayout";
+import Login from "./pages/Login";
 import Income from "./pages/Host/Income";
 import Reviews from "./pages/Host/Reviews";
 import HostVans from "./pages/Host/HostVans";
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="about" element={<About />} />
+      <Route path="login" element={<Login />} />
       <Route
         path="vans"
         element={<VanList />}
