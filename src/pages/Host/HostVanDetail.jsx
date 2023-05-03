@@ -13,8 +13,9 @@ export function loader({ params }) {
 }
 
 export default function HostVanDetail() {
-  const currentVan = useLoaderData();
-  console.log(currentVan);
+  const thisVan = useLoaderData();
+
+  const currentVan = thisVan[0];
 
   const activeStyles = {
     fontWeight: "bold",
