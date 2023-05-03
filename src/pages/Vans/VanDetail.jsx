@@ -8,26 +8,14 @@ export function loader({ params }) {
 }
 
 export default function VanDetail() {
-  // const [van, setVan] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const params = useParams();
-  //   console.log(params);
-
+  // State stored in the browser
   const location = useLocation();
-  // console.log(location);
 
+  //This is where the data is coming from -- replaces the fetch we had in the useEffect originally
   const van = useLoaderData();
-  // console.log(data);
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   fetch(`/api/vans/${params.id}`)
-  //     .then((res) => res.json())
-  //     .then((data) => setVan(data.vans));
-  //   setLoading(false);
-  // }, [params.id]);
-
-  //This uses the location data saved in the Link state from VanList -- if there's a search filter, it's used in the back button URL, if not, no filter is used
+  //This uses the location data saved in the Link state from VanList -- if there's a search filter,
+  // it's used in the back button URL, if not, no filter is used
   const search = location.state?.search || "";
   const type = location.state?.type || "all";
 
@@ -36,20 +24,17 @@ export default function VanDetail() {
       <Link to={`..${search}`} relative="path" className="back-button">
         &larr; <span>Back to {type} vans</span>
       </Link>
-      {!loading ? (
-        <div className="van-detail">
-          <img src={van.imageUrl} />
-          <i className={`van-type ${van.type} selected`}>{van.type}</i>
-          <h2>{van.name}</h2>
-          <p className="van-price">
-            <span>${van.price}</span>/day
-          </p>
-          <p>{van.description}</p>
-          <button className="link-button">Rent this van</button>
-        </div>
-      ) : (
-        <h2>Loading...</h2>
-      )}
+
+      <div className="van-detail">
+        <img src={van.imageUrl} />
+        <i className={`van-type ${van.type} selected`}>{van.type}</i>
+        <h2>{van.name}</h2>
+        <p className="van-price">
+          <span>${van.price}</span>/day
+        </p>
+        <p>{van.description}</p>
+        <button className="link-button">Rent this van</button>
+      </div>
     </div>
   );
 }
