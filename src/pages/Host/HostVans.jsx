@@ -1,22 +1,30 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import { getHostVans } from "../../api";
+
+export function loader() {
+  return getHostVans();
+}
 
 export default function HostVans() {
-  const [vans, setVans] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [vans, setVans] = useState([]);
+  // const [loading, setLoading] = useState(false);
 
-  const fetchVans = async () => {
-    setLoading(true);
-    let results = await fetch(`/api/host/vans`);
-    let data = await results.json();
-    setVans(data.vans);
-    setLoading(false);
-  };
+  // const fetchVans = async () => {
+  //   setLoading(true);
+  //   let results = await fetch(`/api/host/vans`);
+  //   let data = await results.json();
+  //   setVans(data.vans);
+  //   setLoading(false);
+  // };
 
-  useEffect(() => {
-    fetchVans();
-  }, []);
+  // useEffect(() => {
+  //   fetchVans();
+  // }, []);
+
+  const vans = useLoaderData();
+  console.log(vans);
 
   const hostVansEls = vans.map((van) => (
     <Link to={van.id} key={van.id} className="host-van-link-wrapper">
@@ -34,13 +42,7 @@ export default function HostVans() {
     <section>
       <h1 className="host-vans-title">Your listed vans</h1>
       <div className="host-vans-list">
-        {loading ? (
-          <div>
-            <h3>Loading...</h3>
-          </div>
-        ) : (
-          <section>{hostVansEls}</section>
-        )}
+        <section>{hostVansEls}</section>
       </div>
     </section>
   );
