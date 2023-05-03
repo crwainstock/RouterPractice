@@ -1,23 +1,20 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { useParams, Link, Outlet, NavLink } from "react-router-dom";
+import {
+  useParams,
+  Link,
+  NavLink,
+  Outlet,
+  useLoaderData,
+} from "react-router-dom";
+import { getHostVans } from "../../api";
+
+export function loader({ params }) {
+  return getHostVans(params.id);
+}
 
 export default function HostVanDetail() {
-  const [currentVan, setCurrentVan] = useState({});
-
-  const { id } = useParams();
-
-  // Write this function here to avoid the "destroy is not a function" error
-  // https://stackoverflow.com/questions/74265321/uncaught-typeerror-destroy-is-not-a-function-error-in-react
-  const fetchVanDetails = async () => {
-    let results = await fetch(`/api/host/vans/${id}`);
-    let data = await results.json();
-    setCurrentVan(data.vans[0]);
-  };
-
-  useEffect(() => {
-    fetchVanDetails();
-  }, []);
+  const currentVan = useLoaderData();
+  console.log(currentVan);
 
   const activeStyles = {
     fontWeight: "bold",
@@ -26,7 +23,7 @@ export default function HostVanDetail() {
   };
 
   return (
-    <section id="host-van-details">
+    <section>
       <Link to=".." relative="path" className="back-button">
         &larr; <span>Back to all vans</span>
       </Link>
@@ -42,6 +39,7 @@ export default function HostVanDetail() {
             <h4>${currentVan.price}/day</h4>
           </div>
         </div>
+
         <nav className="host-van-detail-nav">
           <NavLink
             to="."
@@ -63,8 +61,7 @@ export default function HostVanDetail() {
             Photos
           </NavLink>
         </nav>
-        <Outlet context={[currentVan, setCurrentVan]} />
-        {/* context={{currentVan}} -- This way sends just the object of data*/}
+        <Outlet context={{ currentVan }} />
       </div>
     </section>
   );

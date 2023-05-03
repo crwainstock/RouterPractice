@@ -24,7 +24,7 @@ export async function getHostVans(id) {
     };
   }
   const data = await res.json();
-  return data.vans;
+  return data.vans[0];
 }
 
 // OLD GET VANS FUNCTION

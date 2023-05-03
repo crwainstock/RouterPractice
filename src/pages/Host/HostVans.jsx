@@ -8,21 +8,6 @@ export function loader() {
 }
 
 export default function HostVans() {
-  // const [vans, setVans] = useState([]);
-  // const [loading, setLoading] = useState(false);
-
-  // const fetchVans = async () => {
-  //   setLoading(true);
-  //   let results = await fetch(`/api/host/vans`);
-  //   let data = await results.json();
-  //   setVans(data.vans);
-  //   setLoading(false);
-  // };
-
-  // useEffect(() => {
-  //   fetchVans();
-  // }, []);
-
   const vans = useLoaderData();
   console.log(vans);
 
