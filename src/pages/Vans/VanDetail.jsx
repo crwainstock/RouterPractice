@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link, useLocation, useLoaderData } from "react-router-dom";
 import { getVans } from "../../api";
 
+// Where does this params object come from? Not sure yet.
 export function loader({ params }) {
   return getVans(params.id);
 }
