@@ -28,6 +28,8 @@ import Error from "./components/Error";
 import "../src/index.css";
 import "./server";
 
+import { requireAuth } from "./utils";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
