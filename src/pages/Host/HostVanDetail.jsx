@@ -15,9 +15,9 @@ export async function loader({ params }) {
 }
 
 export default function HostVanDetail() {
-  const thisVan = useLoaderData(); //Array with object in it
+  const thisVan = useLoaderData();
 
-  const currentVan = thisVan[0]; //Getting at just the object -- not sure why this is necessary
+  const currentVan = thisVan[0];
 
   const activeStyles = {
     fontWeight: "bold",
