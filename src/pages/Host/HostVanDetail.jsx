@@ -7,10 +7,9 @@ import {
   useLoaderData,
 } from "react-router-dom";
 import { getHostVans } from "../../api";
-import { requireAuth } from "../../utils";
 
 export async function loader({ params }) {
-  await requireAuth();
+  // await requireAuth();
   return getHostVans(params.id);
 }
 
