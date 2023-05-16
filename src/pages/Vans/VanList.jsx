@@ -13,7 +13,7 @@ export default function VanList() {
 
   //Using useSearchParams to filter van list by type
   const typeFilter = searchParams.get("type");
-  console.log(typeFilter);
+  // console.log(typeFilter);
 
   //Getting van data from Loader function above
   const vans = useLoaderData();
