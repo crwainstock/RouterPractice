@@ -28,7 +28,7 @@ import Error from "./components/Error";
 import "../src/index.css";
 import "./server";
 
-// import { requireAuth } from "./utils";
+import { requireAuth } from "./utils";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -49,7 +49,7 @@ const router = createBrowserRouter(
           index
           element={<Dashboard />}
           loader={async () => {
-            return null;
+            return await requireAuth();
           }}
         />
         <Route
