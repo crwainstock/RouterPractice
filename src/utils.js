@@ -1,8 +1,8 @@
 import { redirect } from "react-router-dom";
 
 export async function requireAuth() {
-  const isLoggedIn = true;
-
+  const isLoggedIn = false;
+  //This needs to be true to log in with fake data, but it's throwing an error when it's true...not sure what's up.
   if (!isLoggedIn) {
     throw redirect("/login?message=You must log in first.");
   } else {
