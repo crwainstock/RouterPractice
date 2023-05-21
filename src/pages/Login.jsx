@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { loginUser } from "../api";
 
@@ -8,16 +9,24 @@ export function loginLoader({ request }) {
 }
 
 export default function Login() {
-  const [loginFormData, setLoginFormData] = React.useState({
+  const [status, setStatus] = useState("idle");
+  const [error, setError] = useState(null);
+  const [loginFormData, setLoginFormData] = useState({
     email: "",
     password: "",
   });
   const message = useLoaderData();
-  console.log(message);
+  // console.log(message);
 
   function handleSubmit(e) {
     e.preventDefault();
-    loginUser(loginFormData).then((data) => console.log(data));
+    setStatus("submitting");
+    setError(null);
+    loginUser(loginFormData)
+      .then((data) => console.log(data))
+      // Something isn't quite right here. Even if no username or password is submitted, it's still returning 200
+      .catch((err) => setError(err))
+      .finally(() => setStatus("idle"));
   }
 
   function handleChange(e) {
@@ -31,7 +40,8 @@ export default function Login() {
   return (
     <div className="login-container">
       <h1>Sign in to your account</h1>
-      {message && <h2 className="red">{message}</h2>}
+      {message && <h3 className="red">{message}</h3>}
+      {error && <h3 className="red">{error.message}</h3>}
       <form onSubmit={handleSubmit} className="login-form">
         <input
           name="email"
@@ -47,7 +57,9 @@ export default function Login() {
           placeholder="Password"
           value={loginFormData.password}
         />
-        <button>Log in</button>
+        <button disabled={status === "submitting"}>
+          {status === "submitting" ? "Logging in..." : "Log in"}
+        </button>
       </form>
     </div>
   );
