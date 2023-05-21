@@ -1,6 +1,7 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
 
+// This function accesses the message in the URL from the utils function
 export function loginLoader({ request }) {
   return new URL(request.url).searchParams.get("message");
 }
