@@ -1,5 +1,6 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
+import { loginUser } from "../api";
 
 // This function accesses the message in the URL from the utils function
 export function loginLoader({ request }) {
@@ -16,7 +17,7 @@ export default function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(loginFormData);
+    loginUser(loginFormData).then((data) => console.log(data));
   }
 
   function handleChange(e) {
