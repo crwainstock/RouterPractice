@@ -5,8 +5,9 @@ export async function requireAuth() {
 
   if (!isLoggedIn) {
     throw redirect("/login?message=You must log in first.");
+  } else {
+    return null;
   }
-  return null;
 }
 
 // The ?message=You must log in first allows us to send this message through the URL to render in the login page
