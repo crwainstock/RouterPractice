@@ -1,11 +1,12 @@
 import React from "react";
 
 import { useState } from "react";
-import { useLoaderData, useNavigate, Form } from "react-router-dom";
+import { useLoaderData, Form } from "react-router-dom";
 import { loginUser } from "../api";
 
 // This function accesses the message in the URL from the utils function -- getting error
-export function loginLoader({ request }) {
+export async function loginLoader({ request }) {
+  // console.log(request);
   if (request.url) {
     return new URL(request.url).searchParams.get("message");
   } else {
