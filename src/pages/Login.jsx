@@ -5,6 +5,7 @@ import {
   Form,
   redirect,
   useActionData,
+  useNavigation,
 } from "react-router-dom";
 import { loginUser } from "../api";
 
@@ -29,22 +30,20 @@ export async function action({ request }) {
 
 export default function Login() {
   const [status, setStatus] = React.useState("idle");
-  // const [error, setError] = React.useState(null);
   const message = useLoaderData();
   const navigate = useNavigate();
   const errorMessage = useActionData();
+  const navigation = useNavigation(); // Returns object with data about navigation status of app
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    setStatus("submitting");
-    setError(null);
-    loginUser(loginFormData)
-      .then((data) => {
-        navigate("/host", { replace: true });
-      })
-      .catch((err) => setError(err))
-      .finally(() => setStatus("idle"));
-  }
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   setStatus("submitting");
+  //   loginUser(loginFormData)
+  //     .then((data) => {
+  //       navigate("/host", { replace: true });
+  //     })
+  //     .finally(() => setStatus("idle"));
+  // }
 
   return (
     <div className="login-container">
@@ -55,8 +54,8 @@ export default function Login() {
       <Form method="post" className="login-form" replace>
         <input name="email" type="email" placeholder="Email address" />
         <input name="password" type="password" placeholder="Password" />
-        <button disabled={status === "submitting"}>
-          {status === "submitting" ? "Logging in..." : "Log in"}
+        <button disabled={navigation.state === "submitting"}>
+          {navigation.state === "submitting" ? "Logging in..." : "Log in"}
         </button>
       </Form>
     </div>
