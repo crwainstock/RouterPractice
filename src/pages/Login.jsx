@@ -21,8 +21,9 @@ export async function action({ request }) {
   try {
     const data = await loginUser({ email, password });
     localStorage.setItem("loggedin", true);
-    console.log(data); // Working -- logging token & user data
-    return redirect("/host"); // Not working
+    const pathname =
+      new URL(request.url).searchParams.get("redirectTo") || "/host";
+    return redirect(pathname);
   } catch (err) {
     return err.message;
   }
