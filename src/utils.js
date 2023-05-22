@@ -5,9 +5,10 @@ export async function requireAuth() {
   //This needs to be true to log in with fake data, but it's throwing an error when it's true...not sure what's up.
   if (!isLoggedIn) {
     throw redirect("/login?message=You must log in first.");
-  } else {
-    throw redirect("/login");
   }
+  // } else {
+  //   throw redirect("/login");
+  // }
 }
 
 // The ?message=You must log in first allows us to send this message through the URL to render in the login page

@@ -1,4 +1,3 @@
-// Gets either all vans or van by id
 export async function getVans(id) {
   const url = id ? `/api/vans/${id}` : "/api/vans";
   const res = await fetch(url);
@@ -36,8 +35,7 @@ export async function loginUser(creds) {
 
   if (!res.ok) {
     throw {
-      //This message originally had data.message...something isn't working quite right here.
-      message: res.message,
+      message: data.message,
       statusText: res.statusText,
       status: res.status,
     };
