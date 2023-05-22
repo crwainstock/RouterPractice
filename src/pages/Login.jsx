@@ -10,7 +10,8 @@ export async function action({ request }) {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
-  console.log(email, password);
+  const data = await loginUser({ email, password });
+  console.log(data);
 
   return null;
 }
