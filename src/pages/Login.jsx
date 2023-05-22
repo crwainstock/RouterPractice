@@ -29,21 +29,10 @@ export async function action({ request }) {
 }
 
 export default function Login() {
-  const [status, setStatus] = React.useState("idle");
   const message = useLoaderData();
   const navigate = useNavigate();
   const errorMessage = useActionData();
   const navigation = useNavigation(); // Returns object with data about navigation status of app
-
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   setStatus("submitting");
-  //   loginUser(loginFormData)
-  //     .then((data) => {
-  //       navigate("/host", { replace: true });
-  //     })
-  //     .finally(() => setStatus("idle"));
-  // }
 
   return (
     <div className="login-container">
