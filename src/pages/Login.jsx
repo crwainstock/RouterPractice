@@ -1,6 +1,5 @@
 import React from "react";
-import { useState } from "react";
-import { useLoaderData, useNavigate, redirect, Form } from "react-router-dom";
+import { useLoaderData, useNavigate, Form, redirect } from "react-router-dom";
 import { loginUser } from "../api";
 
 export function loader({ request }) {
@@ -13,27 +12,27 @@ export async function action({ request }) {
   const password = formData.get("password");
   const data = await loginUser({ email, password });
   localStorage.setItem("loggedin", true);
-
-  return null;
+  console.log(data); // Saving login data & token
+  return redirect("/host"); // Not redirecting
 }
 
 export default function Login() {
-  const [status, setStatus] = useState("idle");
-  const [error, setError] = useState(null);
+  const [status, setStatus] = React.useState("idle");
+  const [error, setError] = React.useState(null);
   const message = useLoaderData();
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    setStatus("submitting");
-    setError(null);
-    loginUser(loginFormData)
-      .then((data) => {
-        navigate("/host", { replace: true });
-      })
-      .catch((err) => setError(err))
-      .finally(() => setStatus("idle"));
-  }
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   setStatus("submitting");
+  //   setError(null);
+  //   loginUser(loginFormData)
+  //     .then((data) => {
+  //       navigate("/host", { replace: true });
+  //     })
+  //     .catch((err) => setError(err))
+  //     .finally(() => setStatus("idle"));
+  // }
 
   return (
     <div className="login-container">
