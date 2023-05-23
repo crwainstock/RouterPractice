@@ -1,8 +1,10 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import avatarIcon from "../assets/images/avatar-icon.png";
 
 export default function Header() {
+  const navigate = useNavigate();
+
   const activeStyle = {
     "font-weight": "bold",
     "text-decoration": "underline",
@@ -11,6 +13,8 @@ export default function Header() {
 
   function fakeLogOut() {
     localStorage.removeItem("loggedin");
+    navigate("/");
+    // window.location.reload();
   }
 
   return (
