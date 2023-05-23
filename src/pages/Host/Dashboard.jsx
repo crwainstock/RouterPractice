@@ -1,12 +1,14 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Link, defer, Await, useLoaderData } from "react-router-dom";
 import { getHostVans } from "../../api";
 import { requireAuth } from "../../utils";
 import { BsStarFill } from "react-icons/bs";
+import BarLoader from "react-spinners/BarLoader";
 
 export async function loader({ request }) {
   await requireAuth(request);
   const hostVansPromise = getHostVans();
+  console.log(hostVansPromise);
   return defer({ vans: hostVansPromise });
 }
 
@@ -58,9 +60,10 @@ export default function Dashboard() {
           <h2>Your listed vans</h2>
           <Link to="vans">View all</Link>
         </div>
-        <React.Suspense fallback={<h3>Loading...</h3>}>
+
+        <Suspense fallback={<BarLoader color="#ff8c38" />}>
           <Await resolve={dataPromise.vans}>{renderVanElements}</Await>
-        </React.Suspense>
+        </Suspense>
       </section>
     </>
   );
