@@ -8,11 +8,11 @@ import {
   defer,
   Await,
 } from "react-router-dom";
-import { getVans } from "../../api";
+import { getVan } from "../../api";
 import BarLoader from "react-spinners/BarLoader";
 
 export function loader({ params }) {
-  const vanPromise = getVans(params.id);
+  const vanPromise = getVan(params.id);
   return defer({ van: vanPromise });
 }
 

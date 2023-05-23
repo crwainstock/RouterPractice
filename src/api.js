@@ -1,6 +1,12 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  getDoc,
+  doc,
+} from "firebase/firestore/lite";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -31,6 +37,16 @@ export async function getVans() {
   }));
   console.log(dataArr);
   return dataArr;
+}
+
+// Get individual vans by id from Firestore
+export async function getVan(id) {
+  const docRef = doc(db, "vans", id);
+  const vanSnapshot = await getDoc(docRef);
+  return {
+    ...vanSnapshot.data(),
+    id: vanSnapshot.id,
+  };
 }
 
 // MirageJS getVans
