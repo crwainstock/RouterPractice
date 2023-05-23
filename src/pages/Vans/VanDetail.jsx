@@ -1,11 +1,19 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { useState, useEffect } from "react";
-import { useParams, Link, useLocation, useLoaderData } from "react-router-dom";
+import {
+  useParams,
+  Link,
+  useLocation,
+  useLoaderData,
+  defer,
+  Await,
+} from "react-router-dom";
 import { getVans } from "../../api";
+import BarLoader from "react-spinners/BarLoader";
 
-// Where does this params object come from? Not sure yet.
 export function loader({ params }) {
-  return getVans(params.id);
+  const vanPromise = getVans(params.id);
+  return defer({ van: vanPromise });
 }
 
 export default function VanDetail() {
@@ -13,29 +21,37 @@ export default function VanDetail() {
   const location = useLocation();
 
   //This is where the data is coming from -- replaces the fetch we had in the useEffect originally
-  const van = useLoaderData();
+  const dataPromise = useLoaderData();
 
   //This uses the location data saved in the Link state from VanList -- if there's a search filter,
   // it's used in the back button URL, if not, no filter is used
   const search = location.state?.search || "";
   const type = location.state?.type || "all";
 
-  return (
-    <div className="van-detail-container">
-      <Link to={`..${search}`} relative="path" className="back-button">
-        &larr; <span>Back to {type} vans</span>
-      </Link>
+  function renderVanDetails(van) {
+    return (
+      <div className="van-detail-container">
+        <Link to={`..${search}`} relative="path" className="back-button">
+          &larr; <span>Back to {type} vans</span>
+        </Link>
 
-      <div className="van-detail">
-        <img src={van.imageUrl} />
-        <i className={`van-type ${van.type} selected`}>{van.type}</i>
-        <h2>{van.name}</h2>
-        <p className="van-price">
-          <span>${van.price}</span>/day
-        </p>
-        <p>{van.description}</p>
-        <button className="link-button">Rent this van</button>
+        <div className="van-detail">
+          <img src={van.imageUrl} />
+          <i className={`van-type ${van.type} selected`}>{van.type}</i>
+          <h2>{van.name}</h2>
+          <p className="van-price">
+            <span>${van.price}</span>/day
+          </p>
+          <p>{van.description}</p>
+          <button className="link-button">Rent this van</button>
+        </div>
       </div>
-    </div>
+    );
+  }
+
+  return (
+    <Suspense fallback={<BarLoader color="#ff8c38" />}>
+      <Await resolve={dataPromise.van}>{renderVanDetails}</Await>
+    </Suspense>
   );
 }
