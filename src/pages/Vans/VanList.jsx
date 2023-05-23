@@ -17,7 +17,7 @@ export function loader() {
 
 export default function VanList() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
 
   //Using useSearchParams to filter van list by type
   const typeFilter = searchParams.get("type");
@@ -38,9 +38,9 @@ export default function VanList() {
     });
   }
 
-  if (error) {
-    return <h1>There was an error: {error.message}</h1>;
-  }
+  // if (error) {
+  //   return <h1>There was an error: {error.message}</h1>;
+  // }
 
   function renderVanElements(vans) {
     const displayedVans = typeFilter

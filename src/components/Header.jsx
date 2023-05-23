@@ -37,10 +37,11 @@ export default function Header() {
         >
           Vans
         </NavLink>
+
         <Link to="login" className="login-link">
           <img src={avatarIcon} className="login-icon" />
         </Link>
-        <button onClick={fakeLogOut}>X</button>
+        <button onClick={fakeLogOut}>Logout</button>
       </nav>
     </header>
   );
