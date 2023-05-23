@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { Link, useLoaderData, defer, Await } from "react-router-dom";
 import { getHostVans } from "../../api";
 import { requireAuth } from "../../utils";
+import BarLoader from "react-spinners/BarLoader";
 
 export async function loader({ request }) {
   await requireAuth(request);
@@ -34,7 +35,7 @@ export default function HostVans() {
   return (
     <section>
       <h1 className="host-vans-title">Your listed vans</h1>
-      <Suspense fallback={<h3>Loading your vans...</h3>}>
+      <Suspense fallback={<BarLoader color="#ff8c38" />}>
         <Await resolve={dataPromise.vans}>{renderHostVans}</Await>
       </Suspense>
     </section>

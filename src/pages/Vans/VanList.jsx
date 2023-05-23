@@ -8,6 +8,7 @@ import {
   Await,
 } from "react-router-dom";
 import { getVans } from "../../api";
+import BarLoader from "react-spinners/BarLoader";
 
 export function loader() {
   const vansPromise = getVans();
@@ -109,7 +110,7 @@ export default function VanList() {
   return (
     <div className="van-list-container">
       <h1>Explore our van options</h1>
-      <Suspense fallback={<h3>Loading vans...</h3>}>
+      <Suspense fallback={<BarLoader color="#ff8c38" />}>
         <Await resolve={dataPromise.vans}>{renderVanElements}</Await>
       </Suspense>
     </div>
