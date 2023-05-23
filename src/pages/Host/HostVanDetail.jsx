@@ -1,23 +1,27 @@
-import React from "react";
+import React, { Suspense } from "react";
 import {
   useParams,
   Link,
   NavLink,
   Outlet,
   useLoaderData,
+  defer,
+  Await,
 } from "react-router-dom";
 import { getHostVans } from "../../api";
 import { requireAuth } from "../../utils";
+import BarLoader from "react-spinners/BarLoader";
 
 export async function loader({ params, request }) {
   await requireAuth(request);
-  return getHostVans(params.id);
+  const hostVanPromise = getHostVans(params.id);
+  return defer({ currentVan: hostVanPromise });
 }
 
 export default function HostVanDetail() {
-  const thisVan = useLoaderData();
+  const dataPromise = useLoaderData();
 
-  const currentVan = thisVan[0];
+  // const currentVan = thisVan[0];
 
   const activeStyles = {
     fontWeight: "bold",
@@ -25,12 +29,8 @@ export default function HostVanDetail() {
     color: "#161616",
   };
 
-  return (
-    <section>
-      <Link to=".." relative="path" className="back-button">
-        &larr; <span>Back to all vans</span>
-      </Link>
-
+  function renderHostVanDetails(currentVan) {
+    return (
       <div className="host-van-detail-layout-container">
         <div className="host-van-detail">
           <img src={currentVan.imageUrl} />
@@ -66,6 +66,17 @@ export default function HostVanDetail() {
         </nav>
         <Outlet context={{ currentVan }} />
       </div>
+    );
+  }
+
+  return (
+    <section>
+      <Link to=".." relative="path" className="back-button">
+        &larr; <span>Back to all vans</span>
+      </Link>
+      <Suspense fallback={<BarLoader color="#ff8c38" />}>
+        <Await resolve={dataPromise.currentVan}>{renderHostVanDetails}</Await>
+      </Suspense>
     </section>
   );
 }
