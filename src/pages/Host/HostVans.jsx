@@ -11,6 +11,7 @@ export async function loader({ request }) {
 }
 
 function renderHostVans(vans) {
+  console.log(vans);
   const hostVansEls = vans.map((van) => (
     <Link to={van.id} key={van.id} className="host-van-link-wrapper">
       <div className="host-van-single" key={van.id}>
@@ -31,6 +32,7 @@ function renderHostVans(vans) {
 
 export default function HostVans() {
   const dataPromise = useLoaderData();
+  console.log(dataPromise);
 
   return (
     <section>

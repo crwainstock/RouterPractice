@@ -33,7 +33,7 @@ function renderVanElements(vans) {
 
 export default function Dashboard() {
   const dataPromise = useLoaderData();
-  console.log(dataPromise); //undefined
+  console.log(dataPromise); //a promise
 
   return (
     <>

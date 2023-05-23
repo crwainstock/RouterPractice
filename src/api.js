@@ -6,6 +6,8 @@ import {
   getDocs,
   getDoc,
   doc,
+  query,
+  where,
 } from "firebase/firestore/lite";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -35,7 +37,7 @@ export async function getVans() {
     ...doc.data(),
     id: doc.id,
   }));
-  console.log(dataArr);
+  // console.log(dataArr);
   return dataArr;
 }
 
@@ -64,19 +66,44 @@ export async function getVan(id) {
 //   return data.vans;
 // }
 
-export async function getHostVans(id) {
-  const url = id ? `/api/host/vans/${id}` : "/api/host/vans";
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw {
-      message: "Failed to fetch vans",
-      statusText: res.statusText,
-      status: res.status,
-    };
-  }
-  const data = await res.json();
-  return data.vans;
+// Firestore function to get all vans for specific host (hard coded 123 host)
+// export async function getHostVans() {
+//   // like select * from ... where id = ... in mysql
+//   // 123 is hard coded here, but you could put a variable there based on the information given at login
+//   const q = query(vansCollectionRef, where("hostId", "==", "456"));
+//   const querySnapshot = await getDocs(q);
+//   const dataArr = querySnapshot.docs.map((doc) => ({
+//     ...doc.data(),
+//     id: doc.id,
+//   }));
+//   return dataArr;
+// }
+
+export async function getHostVans() {
+  const q = query(vansCollectionRef, where("hostId", "==", 123));
+  const querySnapshot = await getDocs(q);
+  const dataArr = querySnapshot.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }));
+  console.log("FIREBASE!");
+  console.log(dataArr); //empty array
+  return dataArr;
 }
+
+// export async function getHostVans(id) {
+//   const url = id ? `/api/host/vans/${id}` : "/api/host/vans";
+//   const res = await fetch(url);
+//   if (!res.ok) {
+//     throw {
+//       message: "Failed to fetch vans",
+//       statusText: res.statusText,
+//       status: res.status,
+//     };
+//   }
+//   const data = await res.json();
+//   return data.vans;
+// }
 
 export async function loginUser(creds) {
   const res = await fetch("/api/login", {

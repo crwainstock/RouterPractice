@@ -8,13 +8,13 @@ import {
   defer,
   Await,
 } from "react-router-dom";
-import { getHostVans } from "../../api";
+import { getVan } from "../../api";
 import { requireAuth } from "../../utils";
 import BarLoader from "react-spinners/BarLoader";
 
 export async function loader({ params, request }) {
   await requireAuth(request);
-  const hostVanPromise = getHostVans(params.id);
+  const hostVanPromise = getVan(params.id);
   return defer({ currentVan: hostVanPromise });
 }
 
