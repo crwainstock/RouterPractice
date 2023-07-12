@@ -19,3 +19,8 @@ This app is meant to allow users to search van listings. It also allows van owne
 ## Deployed App
 
 You can see [the app deployed with Netlify here](https://singular-souffle-d09f73.netlify.app/).
+
+To view the host dashboard and content, you can log in using the following:
+
+- email: b@b.com
+- password: p123
